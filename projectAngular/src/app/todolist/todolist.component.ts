@@ -6,6 +6,36 @@ import { Component } from '@angular/core';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
-  title = 'Lista rzeczy do zrobienia'
-  newTodoTitle: string = ''
+  newTodoTitle: string = '';
+
+  todos: Array<Todo> = [
+    {
+      title: 'zakupy',
+      complete: true
+    },
+    {
+      title: 'kino',
+      complete: false
+    }
+  ];
+
+  addToDo() {
+    if(!this.newTodoTitle){
+      return;
+    }
+    const newTodo: Todo = {
+      title: this.newTodoTitle,
+      complete: false
+    };
+    this.todos.push(newTodo);
+    this.newTodoTitle = '';
+  }
+  deleteToDo(index){
+    this.todos.splice(index, 1)
+  }
+}
+
+interface Todo{
+  title: string;
+  complete: boolean;
 }
