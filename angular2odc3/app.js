@@ -7,7 +7,7 @@
     var Class = ng.core.Class;
 
     var QuoteService = Class({
-        constructor: function(){
+        constructor: function QuoteService(){
             this.quotes = quotes;
         },
         getRandomQuote: function(){
@@ -18,28 +18,29 @@
 
     var SecondComponent = Component({
         selector: 'second',
+        providers: [QuoteService],
         template: '<p><em>{{quote.cytat}}</em></p><small>{{quote.autor}}</small>'
     })
     .Class({
-        constructor: function(){
-            var quoteService = new QuoteService();
+        constructor: [QuoteService, function SecondComponent(quoteService){
             this.quote = quoteService.getRandomQuote();
-        },
+        }],
         
     })
 
     var AppComponent = Component({
         selector: 'my-app',
-        template: `<h1>Angular 2.0 - Hello World!!!</h1> <second></second>`
+        template: `<h1>Angular 2.0 - Hello World!!!</h1> 
+                  <second></second>
+                  <second></second>`
     })
     .Class({
-        constructor: function(){}
+        constructor: function AppComponent(){}
     });
 
     var AppModule = NgModule({
         imports: [BrowserModule],
         declarations: [AppComponent, SecondComponent],
-        providers: [QuoteService],
         bootstrap: [AppComponent]
     })
     .Class({
