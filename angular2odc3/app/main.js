@@ -1,27 +1,12 @@
-(function(){
+(function(app){
     
     var Component = ng.core.Component;
     var NgModule = ng.core.NgModule;
     var BrowserModule = ng.platformBrowser.BrowserModule;
     var platformBrowserDynamic = ng.platformBrowserDynamic.platformBrowserDynamic();
     var Class = ng.core.Class;
+    var QuoteService = app.QuoteService;
 
-    var QuoteService = Class({
-        constructor: function QuoteService(){
-            this.quotes = quotes;
-        },
-        getRandomQuote: function(){
-            var randomIndex = Math.floor(Math.random() * quotes.length);
-            return this.quotes[randomIndex];
-        },
-        generateRandomQuotes: function(delay,callback){
-            var self = this;
-            callback(this.getRandomQuote());
-            setInterval(function(){
-                callback(self.getRandomQuote());
-            },delay);
-        }
-    });
 
     var TestService = Class({
         constructor: function() {},
@@ -70,9 +55,4 @@
     })
     platformBrowserDynamic.bootstrapModule(AppModule);
 
-    var quotes = [
-        {cytat: 'To, że milczę, nie znaczy, że nie mam nic do powiedzenia.', autor: 'Johnatan Caroll'},
-        {cytat: 'Lepiej zaliczać się do niektórych, niż do wszystkich.', autor: 'Andrzej Sapkowski'},
-        {cytat: 'Czytanie książek to najpiękniejsza zabawa, jaką sobie ludzkość wymyśliła.', autor: 'Wisława Szymborska'},
-    ]
-})();
+})(window.app || (window.app = {}));
