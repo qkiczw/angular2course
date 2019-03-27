@@ -13,6 +13,13 @@
         getRandomQuote: function(){
             var randomIndex = Math.floor(Math.random() * quotes.length);
             return this.quotes[randomIndex];
+        },
+        generateRandomQuotes: function(delay,callback){
+            var self = this;
+            callback(this.getRandomQuote());
+            setInterval(function(){
+                callback(self.getRandomQuote());
+            },delay);
         }
     });
 
@@ -35,7 +42,10 @@
     })
     .Class({
         constructor: [QuoteService, function SecondComponent(quoteService){
-            this.quote = quoteService.getRandomQuote();
+            var self = this;
+            quoteService.generateRandomQuotes(2000, function(quote){
+                self.quote = quote;
+            });
         }],
         
     })
