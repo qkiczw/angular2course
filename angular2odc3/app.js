@@ -4,6 +4,17 @@
     var NgModule = ng.core.NgModule;
     var BrowserModule = ng.platformBrowser.BrowserModule;
     var platformBrowserDynamic = ng.platformBrowserDynamic.platformBrowserDynamic();
+    var Class = ng.core.Class;
+
+    var QuoteService = Class({
+        constructor: function(){
+            this.quotes = quotes;
+        },
+        getRandomQuote: function(){
+            var randomIndex = Math.floor(Math.random() * quotes.length);
+            return this.quotes[randomIndex];
+        }
+    })
 
     var SecondComponent = Component({
         selector: 'second',
@@ -11,8 +22,8 @@
     })
     .Class({
         constructor: function(){
-            var randomIndex = Math.floor(Math.random() * quotes.length);
-            this.quote = quotes[randomIndex];
+            var quoteService = new QuoteService();
+            this.quote = quoteService.getRandomQuote();
         },
         
     })
@@ -28,6 +39,7 @@
     var AppModule = NgModule({
         imports: [BrowserModule],
         declarations: [AppComponent, SecondComponent],
+        providers: [QuoteService],
         bootstrap: [AppComponent]
     })
     .Class({
