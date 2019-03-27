@@ -14,11 +14,23 @@
             var randomIndex = Math.floor(Math.random() * quotes.length);
             return this.quotes[randomIndex];
         }
-    })
+    });
+
+    var TestService = Class({
+        constructor: function() {},
+        getRandomQuote: function(){
+            return {
+                cytat: 'Cytat testowy',
+                autor: 'Autor Testowy'
+            }
+        }
+    });
 
     var SecondComponent = Component({
         selector: 'second',
-        providers: [QuoteService],
+        providers: [
+            {provide: QuoteService, useClass: TestService}
+        ],
         template: '<p><em>{{quote.cytat}}</em></p><small>{{quote.autor}}</small>'
     })
     .Class({
