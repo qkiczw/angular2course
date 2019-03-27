@@ -29,7 +29,7 @@
     var SecondComponent = Component({
         selector: 'second',
         providers: [
-            {provide: QuoteService, useClass: TestService}
+            {provide: QuoteService, useClass: QuoteService}
         ],
         template: '<p><em>{{quote.cytat}}</em></p><small>{{quote.autor}}</small>'
     })
