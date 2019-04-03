@@ -8,10 +8,7 @@ app.SecondComponent = Component({
 })
 .Class({
     constructor: [QuoteService, function SecondComponent (quoteService){
-       var self = this;
-       quoteService.generateRandomQuotes(2000,function(quote){
-           self.quote = quote;
-       });
+       quoteService.generateRandomQuotes(2000, quote => this.quote = quote );
     }]
 });
 

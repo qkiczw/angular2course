@@ -7,16 +7,13 @@ app.QuoteService = Class({
     },
 
     getRandomQuote: function(){
-        var randomIndex = Math.floor(Math.random() * this.quotes.length);
+        const randomIndex = Math.floor(Math.random() * this.quotes.length);
         return this.quotes[randomIndex];
     },
 
     generateRandomQuotes: function(delay,callback){
-        var self = this;
         callback(this.getRandomQuote());
-        setInterval(function(){
-            callback(self.getRandomQuote());
-        },delay);
+        setInterval(() => callback(this.getRandomQuote()) ,delay);
     }
 })  
 
