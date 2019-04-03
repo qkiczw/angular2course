@@ -5,7 +5,7 @@
   var SecondComponent = app.SecondComponent;
   var AppComponent = app.AppComponent;
 
-app.AppModule = NgModule({
+  @NgModule({
     imports: [BrowserModule],
     declarations: [AppComponent, SecondComponent], 
     providers:[
@@ -13,8 +13,10 @@ app.AppModule = NgModule({
         ],  
     bootstrap: [AppComponent]
 })
-.Class({
-    constructor: function(){}
-})
+  class AppModule{
+
+  }
+  
+app.AppModule = AppModule;
 
 })(window.app || (window.app = {}));
