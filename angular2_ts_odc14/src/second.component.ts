@@ -1,5 +1,6 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {QuoteService} from './quote.service';
+import { Quote } from './quote.model';
 
 @Component({
   selector: 'second',
@@ -7,9 +8,9 @@ import {QuoteService} from './quote.service';
 })
 export class SecondComponent {
 
-  quote;
+  quote: Quote;
 
-  constructor(@Inject(QuoteService) quoteService) {
+  constructor( quoteService: QuoteService) {
     quoteService.generateRandomQuotes(2000, quote => this.quote = quote);
   }
 
