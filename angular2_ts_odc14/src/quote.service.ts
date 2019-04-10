@@ -2,9 +2,9 @@ import {Quote} from './quote.model';
 
 export class QuoteService {
 
-  quotes : Quote[] = quotes2;
+  private quotes : Quote[] = quotes2;
 
-  getRandomQuote() : Quote {
+  private getRandomQuote() : Quote {
     const randomIndex = Math.floor(Math.random() * this.quotes.length);
     return this.quotes[randomIndex];
   }
