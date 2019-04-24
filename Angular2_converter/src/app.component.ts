@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'converter',
-  template: `<input type="number" [(ngModel)]="baseAmount" [class.error]="isValid(baseAmount)"> USD
+  template: `<input type="number" [(ngModel)]="baseAmount" [ngClass]="{error:isValid(baseAmount), warning:baseAmount < 0}"> USD
             = <strong>{{targetAmount}}</strong> GBP 
             `,
   styles: [`input[type=number] {
@@ -10,6 +10,9 @@ import { Component } from '@angular/core';
             }
             .error{
               background-color: #ff5555;
+            }
+            .warning{
+              background-color: green;
             }
             `
 
