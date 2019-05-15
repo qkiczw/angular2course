@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import {ExchangeService} from './exchangeService';
 
 @Component({
   selector: 'converter',
-  template: `<input type="number" [(ngModel)]="baseAmount" [ngClass]="{error:isValid(baseAmount), warning:baseAmount < 0}"> USD
-            = <strong>{{targetAmount}}</strong> GBP 
+  providers: [ExchangeService],
+  template: `<input type="number" [(ngModel)]="baseAmount" [ngClass]="{error:isValid(baseAmount), warning:baseAmount < 0}"> {{baseCurrency}}
+            = <strong>{{targetAmount}}</strong> {{targetCurrency}}
             `,
   styles: [`input[type=number] {
               width: 10ex; text-align: right;
@@ -20,12 +22,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  exchangeRate = 0.70;
+  baseCurrency = 'USD';
+  targetCurrency = 'GBP';
   baseAmount = 1;
+
+  constructor(private exchangeService: ExchangeService){}
   
   get targetAmount(){
-    console.info(Number.isFinite(this.baseAmount))
-    return this.baseAmount * this.exchangeRate;
+    const exchangeRate = this.exchangeService.getExchangeRate(this.baseCurrency, this.targetCurrency);
+    return this.baseAmount * exchangeRate;
   };
 
   isValid(value){
